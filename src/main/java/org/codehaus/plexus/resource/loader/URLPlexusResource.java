@@ -31,6 +31,7 @@ import java.net.URI;
 import java.net.URL;
 
 import org.codehaus.plexus.resource.PlexusResource;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Implementation of {@link PlexusResource} for URL's.
@@ -43,7 +44,7 @@ public class URLPlexusResource implements PlexusResource {
     }
 
     @Override
-    public File getFile() {
+    public @Nullable File getFile() {
         return null;
     }
 
@@ -58,7 +59,7 @@ public class URLPlexusResource implements PlexusResource {
     }
 
     @Override
-    public URI getURI() {
+    public @Nullable URI getURI() {
         return null;
     }
 

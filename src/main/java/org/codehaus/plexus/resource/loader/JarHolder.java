@@ -36,6 +36,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import org.codehaus.plexus.resource.PlexusResource;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A small wrapper around a Jar
@@ -121,14 +122,15 @@ public class JarHolder {
         return urlpath;
     }
 
-    public PlexusResource getPlexusResource(final String name) {
+    public @Nullable PlexusResource getPlexusResource(final String name) {
         final JarEntry entry = theJar.getJarEntry(name);
         if (entry == null) {
             return null;
         }
         return new PlexusResource() {
+
             @Override
-            public File getFile() {
+            public @Nullable File getFile() {
                 return null;
             }
 
@@ -143,7 +145,7 @@ public class JarHolder {
             }
 
             @Override
-            public URI getURI() {
+            public @Nullable URI getURI() {
                 return null;
             }
 

@@ -76,6 +76,7 @@ public class URLResourceLoader extends AbstractResourceLoader {
                     return new URLPlexusResource(u) {
                         private boolean useSuper;
 
+                        @Override
                         public synchronized InputStream getInputStream() throws IOException {
                             if (!useSuper) {
                                 useSuper = true;
@@ -102,6 +103,7 @@ public class URLResourceLoader extends AbstractResourceLoader {
                 return new URLPlexusResource(u) {
                     private boolean useSuper;
 
+                    @Override
                     public synchronized InputStream getInputStream() throws IOException {
                         if (!useSuper) {
                             useSuper = true;

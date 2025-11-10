@@ -61,8 +61,8 @@ public class JarResourceLoader extends AbstractResourceLoader {
             return;
         }
         if (!path.startsWith("jar:")) {
-            LOGGER.error("JarResourceLoader : JAR path must start with jar: -> "
-                    + "see java.net.JarURLConnection for information");
+            LOGGER.error("JarResourceLoader : JAR path must start with jar: -> " +
+                    "see java.net.JarURLConnection for information");
             return;
         }
         if (!path.endsWith("!/")) {

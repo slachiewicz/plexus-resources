@@ -40,6 +40,7 @@ import org.codehaus.plexus.resource.loader.ResourceLoader;
 import org.codehaus.plexus.resource.loader.ResourceNotFoundException;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,7 +99,7 @@ public class DefaultResourceManager implements ResourceManager {
     }
 
     @Override
-    public File resolveLocation(String name, String outputPath) {
+    public @Nullable File resolveLocation(String name, String outputPath) {
         // Honour what the original locator does and return null ...
         try {
             return getResourceAsFile(name, outputPath);
@@ -108,7 +109,7 @@ public class DefaultResourceManager implements ResourceManager {
     }
 
     @Override
-    public File resolveLocation(String name) {
+    public @Nullable File resolveLocation(String name) {
         // Honour what the original locator does and return null ...
         try {
             return getResourceAsFile(name);

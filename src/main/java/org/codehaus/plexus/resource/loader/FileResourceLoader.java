@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import org.codehaus.plexus.resource.PlexusResource;
 import org.codehaus.plexus.util.FileUtils;
+import org.jspecify.annotations.Nullable;
 
 /**
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
@@ -65,7 +66,7 @@ public class FileResourceLoader extends AbstractResourceLoader {
      * @deprecated Use {@link org.codehaus.plexus.resource.ResourceManager#getResourceAsFile(PlexusResource)}.
      */
     @Deprecated
-    public static File getResourceAsFile(String name, String outputPath, File outputDirectory)
+    public static @Nullable File getResourceAsFile(String name, String outputPath, File outputDirectory)
             throws FileResourceCreationException {
 
         File f = new File(name);
@@ -73,26 +74,25 @@ public class FileResourceLoader extends AbstractResourceLoader {
         if (f.exists()) {
             if (outputPath == null) {
                 return f;
-            } else {
-                try {
-                    File outputFile;
+            }
+            try {
+                File outputFile;
 
-                    if (outputDirectory != null) {
-                        outputFile = new File(outputDirectory, outputPath);
-                    } else {
-                        outputFile = new File(outputPath);
-                    }
-
-                    if (!outputFile.getParentFile().exists()) {
-                        outputFile.getParentFile().mkdirs();
-                    }
-
-                    FileUtils.copyFile(f, outputFile);
-
-                    return outputFile;
-                } catch (IOException e) {
-                    throw new FileResourceCreationException("Cannot create file-based resource.", e);
+                if (outputDirectory != null) {
+                    outputFile = new File(outputDirectory, outputPath);
+                } else {
+                    outputFile = new File(outputPath);
                 }
+
+                if (!outputFile.getParentFile().exists()) {
+                    outputFile.getParentFile().mkdirs();
+                }
+
+                FileUtils.copyFile(f, outputFile);
+
+                return outputFile;
+            } catch (IOException e) {
+                throw new FileResourceCreationException("Cannot create file-based resource.", e);
             }
         }
 
